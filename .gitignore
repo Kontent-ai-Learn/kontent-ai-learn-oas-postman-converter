@@ -1,0 +1,67 @@
+###################################
+############### npm ###############
+###################################
+
+*.log
+node_modules/
+npm-debug.log
+npm-debug.log.*
+
+###################################
+############## Build ##############
+###################################
+
+.nyc_output/
+deployment/tools/*
+public/build/
+public/files/
+public/js-api/*
+publish/
+reports/
+storybook/build/
+
+###################################
+######### Generated Files #########
+###################################
+
+client/component-library/components/Icons/components/
+
+###################################
+############### mac ###############
+###################################
+
+.DS_STORE
+
+###################################
+############### IDE ###############
+###################################
+
+.idea/*
+!.idea/codeStyles
+!.idea/codeStyleSettings.xml
+!.idea/inspectionProfiles
+!.idea/jsLibraryMappings.xml
+!.idea/libraries
+!.idea/misc.xml
+!.idea/runConfigurations
+!.idea/typescript-compiler.xml
+!.idea/dictionaries/
+!.idea/file.template.settings.xml
+!.idea/fileTemplates
+.vscode/*
+!.vscode/*.example.*
+report.*.json
+
+###################################
+############## K3Diff #############
+###################################
+
+*.orig
+
+###################################
+########## Local Config ###########
+###################################
+
+buildConfig.local.js
+clientConfig.local.js
+envConfig.local.js
