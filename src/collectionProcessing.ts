@@ -56,11 +56,6 @@ const processCollection = (collection: PostmanCollection): ProcessedPostmanColle
   const folders = collection.item;
   const baseUrl = getBaseUrlFromCollection(collection);
 
-  // Add deprecated label to SRAPI
-  if (processedCollection.info.name === 'Smart Recommendations API') {
-    processedCollection.info.name += ' (Deprecated)';
-  }
-
   if (variables.length > 0 && variables[0].key === 'baseUrl') {
     processedCollection.variable = [];
   }

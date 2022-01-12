@@ -14,7 +14,6 @@ const main = async () => {
     'delivery_api.json',
     'management_api_v1.json',
     'management_api_v2.json',
-    'smart_recommendations_api.json',
   ];
 
   const fileUrls = OAS_SPECS_FILE_NAMES.map(fileName => {
