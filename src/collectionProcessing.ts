@@ -19,12 +19,12 @@ const NEW_COLLECTION_TEMPLATE = {
   variable: [
     {
       key: 'project_id',
-      value: '<insert your Kontent project ID>',
+      value: '<define your Kontent project ID as an environment variable>',
       type: 'string',
     },
     {
       key: 'managementApiKey',
-      value: '<insert your Management API key>',
+      value: '<define your Management API key as an environment variable>',
       type: 'string',
     },
   ],
