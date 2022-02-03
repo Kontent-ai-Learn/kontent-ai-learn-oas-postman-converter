@@ -12,7 +12,7 @@ const NEW_COLLECTION_TEMPLATE = {
   info: {
     _postman_id: 'af018e01-c760-4264-8e6e-8e8fd1875760',
     name: 'Kontent REST APIs',
-    description: 'The [Kontent REST APIs](https://docs.kontent.ai/reference) are designed so you can retrieve and manage content for any application. They\'re built around the REST principle and return content in JSON. [Kontent by Kentico](https://kontent.ai/) is a cloud-first headless CMS that allows you to use Content as a Service to distribute content to any channel and device.\n\nCertain APIs require that you include the `authorization` header.',
+    description: 'The [Kontent REST APIs](https://kontent.ai/learn/reference) are designed so you can retrieve and manage content for any application. They\'re built around the REST principle and return content in JSON. [Kontent by Kentico](https://kontent.ai/) is a cloud-first headless CMS that allows you to use Content as a Service to distribute content to any channel and device.\n\nCertain APIs require that you include the `authorization` header.',
     schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
   },
   item: [],
