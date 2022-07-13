@@ -11,22 +11,27 @@ import { debugLog } from './utils';
 const NEW_COLLECTION_TEMPLATE = {
   info: {
     _postman_id: 'af018e01-c760-4264-8e6e-8e8fd1875760',
-    name: 'Kontent REST APIs',
-    description: 'The [Kontent REST APIs](https://kontent.ai/learn/reference) are designed so you can retrieve and manage content for any application. They\'re built around the REST principle and return content in JSON. [Kontent by Kentico](https://kontent.ai/) is a cloud-first headless CMS that allows you to use Content as a Service to distribute content to any channel and device.\n\nCertain APIs require that you include the `authorization` header.',
+    name: 'Kontent.ai APIs',
+    description: '[Kontent.ai](https://kontent.ai/) is a modular content platform that delivers all content via API. This lets developers like you choose how websites and applications should be built, using any frameworks, languages, or libraries they prefer.\n\nBased on your project settings, some APIs might require that you provide an API key in the `Authorization` header.\n\nFind full [API references at Kontent.ai Learn](https://kontent.ai/learn/reference/kontent-apis-overview/).',
     schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
   },
   item: [],
   variable: [
     {
       key: 'project_id',
-      value: '<define your Kontent project ID as an environment variable>',
+      value: '<Use your project ID>',
       type: 'string',
     },
     {
       key: 'managementApiKey',
-      value: '<define your Management API key as an environment variable>',
+      value: '<Use your Management API key>',
       type: 'string',
     },
+    {
+      key: 'previewApiKey',
+      value: '<Use your Preview API key>',
+      type: 'string',
+    }
   ],
 } as const;
 
