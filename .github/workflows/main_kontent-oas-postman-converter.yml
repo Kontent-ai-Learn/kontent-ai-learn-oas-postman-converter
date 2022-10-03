@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: npm install, build, and test
+      - name: npm ci, build, and test
         run: |
-          npm install
+          npm ci
           npm run build --if-present
           npm run test --if-present
       
@@ -31,7 +31,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: |
+            .
+            !.parcel-cache
+            !node_modules
 
   deploy:
     runs-on: ubuntu-latest

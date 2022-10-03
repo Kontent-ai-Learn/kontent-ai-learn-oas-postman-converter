@@ -19,12 +19,14 @@ public/js-api/*
 publish/
 reports/
 storybook/build/
+.parcel-cache
+dist
 
 ###################################
 ######### Generated Files #########
 ###################################
 
-client/component-library/components/Icons/components/
+debug.log
 
 ###################################
 ############### mac ###############
