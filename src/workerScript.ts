@@ -1,13 +1,10 @@
-import { processSpecs } from './collectionProcessing';
-import { fetchSpecFiles } from './fetchSpecFiles';
-import {
-  debugLog,
-  prettyPrint,
-} from './utils';
+import {processSpecs} from './collectionProcessing';
+import {fetchSpecFiles} from './fetchSpecFiles';
+import {debugLog, prettify,} from './utils';
 
 const blobFolderUrl = process.env.BlobFolderUrl;
 
-const main = async () => {
+export const work = async () => {
   debugLog(`Blob folder Url is '${blobFolderUrl}'.`);
 
   const OAS_SPECS_FILE_NAMES = [
@@ -20,10 +17,12 @@ const main = async () => {
     return `${blobFolderUrl}${fileName}`;
   });
 
-  const specs = await fetchSpecFiles(fileUrls);
-  const collection = await processSpecs(specs);
+  try {
+    const specs = await fetchSpecFiles(fileUrls);
+    const collection = await processSpecs(specs);
 
-  prettyPrint(collection);
+    return prettify(collection);
+  } catch (error) {
+    return prettify(error);
+  }
 };
-
-main();

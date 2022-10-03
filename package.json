@@ -1,43 +1,45 @@
 {
   "name": "convert-openapi-to-postman",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Converts OpenAPI descriptions to a Postman collection",
-  "main": "src/index.ts",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "cross-env babel-node --extensions '.ts','.tsx','.js' src/index.ts"
+    "start": "node dist/index.js",
+    "build": "parcel build"
+  },
+  "engines": {
+    "node": "18.3.0",
+    "npm": "8.11.0"
   },
   "author": "janc@kentico.com",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "7.15.0",
-    "@babel/node": "7.14.9",
-    "@babel/plugin-proposal-class-properties": "7.14.5",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "7.14.5",
-    "@babel/plugin-proposal-numeric-separator": "7.14.5",
-    "@babel/plugin-proposal-object-rest-spread": "7.14.7",
-    "@babel/plugin-proposal-optional-chaining": "7.14.5",
-    "@babel/plugin-transform-modules-umd": "7.14.5",
-    "@babel/plugin-transform-strict-mode": "7.14.5",
-    "@babel/preset-env": "7.15.0",
-    "@babel/preset-react": "7.14.5",
-    "@babel/preset-typescript": "7.15.0",
-    "@babel/register": "7.15.3",
     "@types/express": "4.17.13",
     "@types/fs-extra": "9.0.12",
     "@types/morgan": "1.9.3",
     "@types/node-fetch": "2.5.12",
     "@types/webpack-dev-middleware": "5.0.2",
-    "babel-loader": "8.2.2",
-    "babel-node": "0.0.1-security",
-    "babel-plugin-styled-components": "1.13.2",
     "body-parser": "1.19.0",
     "connect-timeout": "1.9.0",
-    "cross-env": "7.0.3",
     "express": "4.17.1",
     "fs-extra": "10.0.0",
-    "html-webpack-plugin": "5.3.2",
     "morgan": "1.10.0",
     "node-fetch": "2.6.1",
     "openapi-to-postmanv2": "2.11.0"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10",
+    "querystring-es3": "^0.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "string_decoder": "^1.3.0",
+    "url": "^0.11.0",
+    "util": "^0.12.4"
   }
 }

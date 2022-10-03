@@ -1,33 +1,21 @@
-import { exec } from 'child_process';
 // @ts-ignore
 import timeout from 'connect-timeout';
 import express from 'express';
 import morgan from 'morgan';
-import { AddressInfo } from 'net';
-import {
-  log,
-  prettify,
-} from './utils';
+import {AddressInfo} from 'net';
+import {log, prettify,} from './utils';
+import {work} from "./workerScript";
 
 let runningWorkerPromise: Promise<string> | null = null;
 
 const getWorkerPromise = (): Promise<string> => {
   if (!runningWorkerPromise) {
-    runningWorkerPromise = new Promise<string>(resolve => {
-      exec(`npx cross-env babel-node --extensions '.ts','.tsx','.js' src/workerScript.ts`, (error, stdout, stderr) => {
-        if (error) {
-          resolve(prettify({
-            fail: 'FAIL! Sorry...',
-            error,
-            stdout,
-            stderr,
-          }));
-        }
-        else {
-          log('Debug log:');
-          log(stderr);
-          resolve(stdout);
-        }
+    runningWorkerPromise = work().then(collection => {
+      return collection;
+    }).catch(error => {
+      return prettify({
+        fail: 'FAIL! Sorry...',
+        error,
       });
     }).finally(() => {
       runningWorkerPromise = null;
@@ -45,6 +33,7 @@ const main = async () => {
   const router = express.Router();
 
   router.get('/collection.json', async (_req, res) => {
+    log('Got a request.');
     res.setHeader('Content-Type', 'application/json');
     res.write(' ');
     const ping = setInterval(() => {
@@ -52,10 +41,14 @@ const main = async () => {
       res.write(' ');
     }, 5000);
 
-    const response = await getWorkerPromise();
-
-    clearInterval(ping);
-    res.end(response);
+    try {
+      log('Launching the promise.');
+      const response = await getWorkerPromise();
+      log('Got the promise result.');
+      res.end(response);
+    } finally {
+      clearInterval(ping);
+    }
   });
 
   app.use(router);
