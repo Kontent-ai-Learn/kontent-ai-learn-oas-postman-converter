@@ -29,7 +29,12 @@ const NEW_COLLECTION_TEMPLATE = {
     },
     {
       key: 'previewApiKey',
-      value: '<Use your Preview API key>',
+      value: '<Use your Delivery Preview API key>',
+      type: 'string',
+    },
+    {
+      key: 'deliveryApiKey',
+      value: '<Use your Delivery API key>',
       type: 'string',
     }
   ],
