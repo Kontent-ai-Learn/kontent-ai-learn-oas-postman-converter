@@ -10,7 +10,8 @@ export const work = async () => {
   const OAS_SPECS_FILE_NAMES = [
     'delivery_api.json',
     'management_api_v2.json',
-    'subscription_api.json'
+    'subscription_api.json',
+    'sync_api.json'
   ];
 
   const fileUrls = OAS_SPECS_FILE_NAMES.map(fileName => {
