@@ -9,8 +9,8 @@
     "build": "parcel build"
   },
   "engines": {
-    "node": "18.3.0",
-    "npm": "8.11.0"
+    "node": "18.9.0",
+    "npm": "8.19.1"
   },
   "author": "janc@kentico.com",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "fs-extra": "10.0.0",
     "morgan": "1.10.0",
     "node-fetch": "^2.6.7",
-    "openapi-to-postmanv2": "^4.1.1"
+    "openapi-to-postmanv2": "^4.4.0"
   },
   "devDependencies": {
     "assert": "^2.0.0",

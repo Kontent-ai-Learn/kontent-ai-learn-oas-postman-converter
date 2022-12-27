@@ -28,6 +28,11 @@ const NEW_COLLECTION_TEMPLATE = {
       type: 'string',
     },
     {
+      key: 'subscriptionApiKey',
+      value: '<Use your Subscription API key>',
+      type: 'string',
+    },
+    {
       key: 'previewApiKey',
       value: '<Use your Delivery Preview API key>',
       type: 'string',
@@ -40,12 +45,23 @@ const NEW_COLLECTION_TEMPLATE = {
   ],
 } as const;
 
-const MAPI_AUTH = {
+const ManagementAPI_AUTH = {
   type: 'bearer',
   bearer: [
     {
       key: 'token',
       value: '{{managementApiKey}}',
+      type: 'string',
+    },
+  ],
+} as const;
+
+const SubscriptionAPI_AUTH = {
+  type: 'bearer',
+  bearer: [
+    {
+      key: 'token',
+      value: '{{subscriptionApiKey}}',
       type: 'string',
     },
   ],
@@ -141,7 +157,9 @@ const mergeCollections = (collections: ReadonlyArray<ProcessedPostmanCollection>
     name: collection.info.name,
     item: collection.item,
     description: collection.info.description.content,
-    auth: collection.info.name.includes('Management API') ? MAPI_AUTH : NO_AUTH,
+    auth: collection.info.name.includes('Management API') ? ManagementAPI_AUTH
+        : collection.info.name.includes('Subscription API') ? SubscriptionAPI_AUTH
+        : NO_AUTH,
     event: [],
   }));
   const mergedCollection = Object.assign({}, NEW_COLLECTION_TEMPLATE, { item: folders });
