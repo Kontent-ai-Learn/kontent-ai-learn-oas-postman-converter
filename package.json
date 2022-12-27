@@ -9,8 +9,8 @@
     "build": "parcel build"
   },
   "engines": {
-    "node": "18.9.0",
-    "npm": "8.19.1"
+    "node": "18.12.1",
+    "npm": "8.19.2"
   },
   "author": "janc@kentico.com",
   "license": "MIT",
@@ -20,9 +20,9 @@
     "@types/morgan": "1.9.3",
     "@types/node-fetch": "2.5.12",
     "@types/webpack-dev-middleware": "5.0.2",
-    "body-parser": "1.19.0",
+    "body-parser": "^1.20.1",
     "connect-timeout": "1.9.0",
-    "express": "4.17.1",
+    "express": "^4.18.2",
     "fs-extra": "10.0.0",
     "morgan": "1.10.0",
     "node-fetch": "^2.6.7",
@@ -33,7 +33,7 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
-    "parcel": "^2.7.0",
+    "parcel": "^2.8.2",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
     "stream-browserify": "^3.0.0",
