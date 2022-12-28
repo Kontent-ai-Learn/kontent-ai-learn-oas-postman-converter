@@ -10,7 +10,6 @@ import { debugLog } from './utils';
 
 const NEW_COLLECTION_TEMPLATE = {
   info: {
-    _postman_id: 'af018e01-c760-4264-8e6e-8e8fd1875760',
     name: 'Kontent.ai APIs',
     description: '[Kontent.ai](https://kontent.ai/) is a modular content platform that delivers all content via API. This lets developers like you choose how websites and applications should be built, using any frameworks, languages, or libraries they prefer.\n\nBased on your project settings, some APIs might require that you provide an API key in the `Authorization` header.\n\nFind full [API references at Kontent.ai Learn](https://kontent.ai/learn/reference/kontent-apis-overview/).',
     schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
@@ -19,28 +18,23 @@ const NEW_COLLECTION_TEMPLATE = {
   variable: [
     {
       key: 'project_id',
-      value: '<Use your project ID>',
-      type: 'string',
+      value: '<Use your project ID>'
     },
     {
       key: 'managementApiKey',
-      value: '<Use your Management API key>',
-      type: 'string',
+      value: '<Use your Management API key>'
     },
     {
       key: 'subscriptionApiKey',
-      value: '<Use your Subscription API key>',
-      type: 'string',
+      value: '<Use your Subscription API key>'
     },
     {
       key: 'previewApiKey',
-      value: '<Use your Delivery Preview API key>',
-      type: 'string',
+      value: '<Use your Delivery Preview API key>'
     },
     {
       key: 'deliveryApiKey',
-      value: '<Use your Delivery API key>',
-      type: 'string',
+      value: '<Use your Delivery API key>'
     }
   ],
 } as const;
@@ -356,6 +350,8 @@ const convertSpecToPostmanCollection = async (spec: Spec): Promise<PostmanCollec
         folderStrategy: 'Tags',
         includeAuthInfoInExample: true,
         includeDeprecated: false,
+        optimizeConversion: false,
+        stackLimit: 50,
         requestParametersResolution: 'Schema',
       },
       (err: Error, conversionResult: PostmanCollection) => {
