@@ -131,11 +131,12 @@ const convertSpecToPostmanCollection = async (spec: Spec): Promise<PostmanCollec
         data: spec,
       },
       {
+        disableOptionalParameters: true,
+        exampleParametersResolution: 'Example',
         folderStrategy: 'Tags',
         includeAuthInfoInExample: true,
-        disableOptionalParameters: true,
+        includeDeprecated: false,
         requestParametersResolution: 'Schema',
-        exampleParametersResolution: 'Example',
       },
       (err: Error, conversionResult: PostmanCollection) => {
         if (conversionResult.result) {
