@@ -45,6 +45,226 @@ const NEW_COLLECTION_TEMPLATE = {
   ],
 } as const;
 
+const GRAPHQL_API_COLLECTION = {
+  "name": "Delivery GraphQL API",
+  "item": [
+    {
+      "name": "Get published content",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://graphql.kontent.ai/:project_id",
+          "protocol": "https",
+          "host": [
+            "graphql",
+            "kontent",
+            "ai"
+          ],
+          "path": [
+            ":project_id"
+          ],
+          "variable": [
+            {
+              "key": "project_id",
+              "value": "{{project_id}}"
+            }
+          ]
+        },
+        "description": "1.  Add your project ID to the Postman environment variable `project_id` .\n2.  If you're using [secure access](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/restrict-public-access/), add your API key on the Auth tab.\n3.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n4.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
+      },
+      "response": [
+        {
+          "name": "Get a content item",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "https://graphql.kontent.ai/:project_id",
+              "protocol": "https",
+              "host": [
+                "graphql",
+                "kontent",
+                "ai"
+              ],
+              "path": [
+                ":project_id"
+              ],
+              "variable": [
+                {
+                  "key": "project_id",
+                  "value": "<Use your project ID>"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "List content items",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "https://graphql.kontent.ai/:project_id",
+              "protocol": "https",
+              "host": [
+                "graphql",
+                "kontent",
+                "ai"
+              ],
+              "path": [
+                ":project_id"
+              ],
+              "variable": [
+                {
+                  "key": "project_id",
+                  "value": "{{project_id}}"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Preview latest content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{previewApiKey}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{secureApiKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://preview-graphql.kontent.ai/:project_id",
+          "protocol": "https",
+          "host": [
+            "preview-graphql",
+            "kontent",
+            "ai"
+          ],
+          "path": [
+            ":project_id"
+          ],
+          "variable": [
+            {
+              "key": "project_id",
+              "value": "{{project_id}}"
+            }
+          ]
+        },
+        "description": "1.  Add your project ID and Preview API key to the Postman environment variables `project_id` and `previewApiKey`.\n2.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n3.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
+      },
+      "response": [
+        {
+          "name": "Get a content item",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "https://preview-graphql.kontent.ai/:project_id",
+              "protocol": "https",
+              "host": [
+                "preview-graphql",
+                "kontent",
+                "ai"
+              ],
+              "path": [
+                ":project_id"
+              ],
+              "variable": [
+                {
+                  "key": "project_id",
+                  "value": "{{project_id}}"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "List content items",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "https://preview-graphql.kontent.ai/:project_id",
+              "protocol": "https",
+              "host": [
+                "preview-graphql",
+                "kontent",
+                "ai"
+              ],
+              "path": [
+                ":project_id"
+              ],
+              "variable": [
+                {
+                  "key": "project_id",
+                  "value": "{{project_id}}"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ],
+  "description": "For guidance on using the Delivery GraphQL API and in-depth explanation of its features, check the full [Delivery GraphQL API reference at Kontent.ai Learn](https://kontent.ai/learn/reference/delivery-graphql-api/)."
+} as const;
+
 const ManagementAPI_AUTH = {
   type: 'bearer',
   bearer: [
@@ -163,7 +383,7 @@ const mergeCollections = (collections: ReadonlyArray<ProcessedPostmanCollection>
         : NO_AUTH,
     event: [],
   }));
-  const mergedCollection = Object.assign({}, NEW_COLLECTION_TEMPLATE, { item: folders });
+  const mergedCollection = Object.assign({}, NEW_COLLECTION_TEMPLATE, { item: [GRAPHQL_API_COLLECTION, ...folders] });
   debugLog('Merged processed collections');
   return mergedCollection;
 };
