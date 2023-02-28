@@ -65,21 +65,28 @@ export const work = async () => {
 
   const fetchedApiReferences: string[] = [];
 
+  const fetchPromises: Promise<void>[] = [];
   for (const file of processFiles) {
     debugLog(`Fetching file '${file}'`);
 
-    const apiReferenceCode = await githubService.getApiReferenceCode({
-      filePath: `${file}`,
-    });
+    fetchPromises.push(
+      githubService
+        .getApiReferenceCode({
+          filePath: `${file}`,
+        })
+        .then((apiReferenceCode) => {
+          if (apiReferenceCode) {
+            fetchedApiReferences.push(apiReferenceCode);
+          } else {
+            debugLog(`File '${file}' is empty or invalid`);
+          }
 
-    if (apiReferenceCode) {
-      fetchedApiReferences.push(apiReferenceCode);
-    } else {
-      debugLog(`File '${file}' is empty or invalid`);
-    }
-
-    debugLog(`Successfully fetched '${file}'`);
+          debugLog(`Successfully fetched '${file}'`);
+        })
+    );
   }
+
+  await Promise.all(fetchPromises);
 
   const collection = await processSpecs(fetchedApiReferences);
 
