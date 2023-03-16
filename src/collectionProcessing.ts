@@ -11,14 +11,14 @@ import { debugLog } from './utils';
 const NEW_COLLECTION_TEMPLATE = {
   info: {
     name: 'Kontent.ai APIs',
-    description: '[Kontent.ai](https://kontent.ai/) is a modular content platform that delivers all content via API. This lets developers like you choose how websites and applications should be built, using any frameworks, languages, or libraries they prefer.\n\nBased on your project settings, some APIs might require that you provide an API key in the `Authorization` header.\n\nFind full [API references at Kontent.ai Learn](https://kontent.ai/learn/reference/kontent-apis-overview/).',
+    description: '[Kontent.ai](https://kontent.ai/) is a headless CMS that delivers content via API. This lets developers choose how websites and applications should be built, using any frameworks, languages, or libraries they prefer.\n\nBased on your project settings, some APIs might require that you provide an API key in the `Authorization` header.\n\nFind full [API references at Kontent.ai Learn](https://kontent.ai/learn/reference/).',
     schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
   },
   item: [],
   variable: [
     {
-      key: 'project_id',
-      value: '<Use your project ID>'
+      key: 'environment_id',
+      value: '<Use your environment ID>'
     },
     {
       key: 'managementApiKey',
@@ -55,7 +55,7 @@ const GRAPHQL_API_COLLECTION = {
           }
         },
         "url": {
-          "raw": "https://graphql.kontent.ai/:project_id",
+          "raw": "https://graphql.kontent.ai/:environment_id",
           "protocol": "https",
           "host": [
             "graphql",
@@ -63,16 +63,16 @@ const GRAPHQL_API_COLLECTION = {
             "ai"
           ],
           "path": [
-            ":project_id"
+            ":environment_id"
           ],
           "variable": [
             {
-              "key": "project_id",
-              "value": "{{project_id}}"
+              "key": "environment_id",
+              "value": "{{environment_id}}"
             }
           ]
         },
-        "description": "1.  Add your project ID to the Postman environment variable `project_id` .\n2.  If you're using [secure access](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/restrict-public-access/), add your API key on the Auth tab.\n3.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n4.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
+        "description": "1.  Add your project ID to the Postman environment variable `environment_id` .\n2.  If you're using [secure access](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/restrict-public-access/), add your API key on the Auth tab.\n3.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n4.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
       },
       "response": [
         {
@@ -84,7 +84,7 @@ const GRAPHQL_API_COLLECTION = {
               "mode": "graphql"
             },
             "url": {
-              "raw": "https://graphql.kontent.ai/:project_id",
+              "raw": "https://graphql.kontent.ai/:environment_id",
               "protocol": "https",
               "host": [
                 "graphql",
@@ -92,11 +92,11 @@ const GRAPHQL_API_COLLECTION = {
                 "ai"
               ],
               "path": [
-                ":project_id"
+                ":environment_id"
               ],
               "variable": [
                 {
-                  "key": "project_id",
+                  "key": "environment_id",
                   "value": "<Use your project ID>"
                 }
               ]
@@ -116,7 +116,7 @@ const GRAPHQL_API_COLLECTION = {
               "mode": "graphql"
             },
             "url": {
-              "raw": "https://graphql.kontent.ai/:project_id",
+              "raw": "https://graphql.kontent.ai/:environment_id",
               "protocol": "https",
               "host": [
                 "graphql",
@@ -124,12 +124,12 @@ const GRAPHQL_API_COLLECTION = {
                 "ai"
               ],
               "path": [
-                ":project_id"
+                ":environment_id"
               ],
               "variable": [
                 {
-                  "key": "project_id",
-                  "value": "{{project_id}}"
+                  "key": "environment_id",
+                  "value": "{{environment_id}}"
                 }
               ]
             }
@@ -169,7 +169,7 @@ const GRAPHQL_API_COLLECTION = {
           }
         },
         "url": {
-          "raw": "https://preview-graphql.kontent.ai/:project_id",
+          "raw": "https://preview-graphql.kontent.ai/:environment_id",
           "protocol": "https",
           "host": [
             "preview-graphql",
@@ -177,16 +177,16 @@ const GRAPHQL_API_COLLECTION = {
             "ai"
           ],
           "path": [
-            ":project_id"
+            ":environment_id"
           ],
           "variable": [
             {
-              "key": "project_id",
-              "value": "{{project_id}}"
+              "key": "environment_id",
+              "value": "{{environment_id}}"
             }
           ]
         },
-        "description": "1.  Add your project ID and Preview API key to the Postman environment variables `project_id` and `previewApiKey`.\n2.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n3.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
+        "description": "1.  Add your project ID and Preview API key to the Postman environment variables `environment_id` and `previewApiKey`.\n2.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n3.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
       },
       "response": [
         {
@@ -198,7 +198,7 @@ const GRAPHQL_API_COLLECTION = {
               "mode": "graphql"
             },
             "url": {
-              "raw": "https://preview-graphql.kontent.ai/:project_id",
+              "raw": "https://preview-graphql.kontent.ai/:environment_id",
               "protocol": "https",
               "host": [
                 "preview-graphql",
@@ -206,12 +206,12 @@ const GRAPHQL_API_COLLECTION = {
                 "ai"
               ],
               "path": [
-                ":project_id"
+                ":environment_id"
               ],
               "variable": [
                 {
-                  "key": "project_id",
-                  "value": "{{project_id}}"
+                  "key": "environment_id",
+                  "value": "{{environment_id}}"
                 }
               ]
             }
@@ -230,7 +230,7 @@ const GRAPHQL_API_COLLECTION = {
               "mode": "graphql"
             },
             "url": {
-              "raw": "https://preview-graphql.kontent.ai/:project_id",
+              "raw": "https://preview-graphql.kontent.ai/:environment_id",
               "protocol": "https",
               "host": [
                 "preview-graphql",
@@ -238,12 +238,12 @@ const GRAPHQL_API_COLLECTION = {
                 "ai"
               ],
               "path": [
-                ":project_id"
+                ":environment_id"
               ],
               "variable": [
                 {
-                  "key": "project_id",
-                  "value": "{{project_id}}"
+                  "key": "environment_id",
+                  "value": "{{environment_id}}"
                 }
               ]
             }
@@ -309,8 +309,8 @@ const processCollection = (collection: PostmanCollection): ProcessedPostmanColle
 
         // Use a variable for project ID
         if (requestDefinition.url.variable.length > 0 &&
-          requestDefinition.url.variable[0].key === 'project_id') {
-          requestInfo.request.url.variable[0].value = '{{project_id}}';
+          requestDefinition.url.variable[0].key === 'environment_id') {
+          requestInfo.request.url.variable[0].value = '{{environment_id}}';
         }
 
         // Use a hardcoded base URL for requests
