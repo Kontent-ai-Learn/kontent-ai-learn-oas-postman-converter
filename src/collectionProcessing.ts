@@ -72,7 +72,7 @@ const GRAPHQL_API_COLLECTION = {
             }
           ]
         },
-        "description": "1.  Add your project ID to the Postman environment variable `environment_id` .\n2.  If you're using [secure access](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/restrict-public-access/), add your API key on the Auth tab.\n3.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n4.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
+        "description": "1.  Add your environment ID to the Postman environment variable `environment_id` .\n2.  If you're using [secure access](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/restrict-public-access/), add your API key on the Auth tab.\n3.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project.\n4.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
       },
       "response": [
         {
@@ -307,7 +307,7 @@ const processCollection = (collection: PostmanCollection): ProcessedPostmanColle
         let requestDefinition = requestInfo.request;
         let responses = requestInfo.response;
 
-        // Use a variable for project ID
+        // Use a variable for environment ID
         if (requestDefinition.url.variable.length > 0 &&
           requestDefinition.url.variable[0].key === 'environment_id') {
           requestInfo.request.url.variable[0].value = '{{environment_id}}';
