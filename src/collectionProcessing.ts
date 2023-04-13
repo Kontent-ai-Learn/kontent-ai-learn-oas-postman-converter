@@ -186,7 +186,7 @@ const GRAPHQL_API_COLLECTION = {
             }
           ]
         },
-        "description": "1.  Add your project ID and Preview API key to the Postman environment variables `environment_id` and `previewApiKey`.\n2.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project's environment.\n3.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
+        "description": "1.  Add your environment ID and Preview API key to the Postman environment variables `environment_id` and `previewApiKey`.\n2.  Switch to the Body tab and [fetch the schema](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/#introspection-and-importing-graphql-schemas) for your project's environment.\n3.  Start sending [queries](https://kontent.ai/learn/reference/delivery-graphql-api/#a-query-content)."
       },
       "response": [
         {
