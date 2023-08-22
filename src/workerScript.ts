@@ -3,6 +3,11 @@ import { debugLog, prettify } from "./utils";
 import * as dotenv from "dotenv";
 import { GithubService } from "./githubService";
 
+interface IApiReferenceFetchResult {
+  code: string;
+  apiReferenceFile: string;
+}
+
 // needed to load .env environment to current process when run via package.json script
 dotenv.config({
   path: "./.env.local",
@@ -63,7 +68,7 @@ export const work = async () => {
     `Accessing GitHub: '${owner}/${repository}@${branch}' with user '${username}(${email})'`
   );
 
-  const fetchedApiReferences: string[] = [];
+  const fetchedApiReferences: IApiReferenceFetchResult[] = [];
 
   const fetchPromises: Promise<void>[] = [];
   for (const file of processFiles) {
@@ -76,7 +81,10 @@ export const work = async () => {
         })
         .then((apiReferenceCode) => {
           if (apiReferenceCode) {
-            fetchedApiReferences.push(apiReferenceCode);
+            fetchedApiReferences.push({
+              code: apiReferenceCode,
+              apiReferenceFile: file,
+            });
           } else {
             debugLog(`File '${file}' is empty or invalid`);
           }
@@ -88,7 +96,23 @@ export const work = async () => {
 
   await Promise.all(fetchPromises);
 
-  const collection = await processSpecs(fetchedApiReferences);
+  const orderedApiReferences: IApiReferenceFetchResult[] = [];
+
+  for (const filename of processFiles) {
+    const fetchedReference = fetchedApiReferences.find(
+      (m) =>
+        m.apiReferenceFile.toLowerCase().trim() ===
+        filename.toLowerCase().trim()
+    );
+
+    if (fetchedReference) {
+      orderedApiReferences.push(fetchedReference);
+    }
+  }
+
+  const collection = await processSpecs(
+    orderedApiReferences.map((m) => m.code)
+  );
 
   return prettify(collection);
 };
