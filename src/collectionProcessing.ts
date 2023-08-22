@@ -11,7 +11,7 @@ import { debugLog } from './utils';
 const NEW_COLLECTION_TEMPLATE = {
   info: {
     name: 'Kontent.ai APIs',
-    description: '[Kontent.ai](https://kontent.ai/) is a headless CMS that delivers content via API. This lets developers choose how websites and applications should be built, using any frameworks, languages, or libraries they prefer.\n\nBased on your project settings, some APIs might require that you provide an API key in the `Authorization` header.\n\nFind full [API references at Kontent.ai Learn](https://kontent.ai/learn/reference/).',
+    description: '[Kontent.ai](https://kontent.ai/) is a headless CMS that delivers content via API. This lets developers choose how websites and applications should be built, using any frameworks, languages, or libraries they prefer.\n\nBased on your project settings, some APIs might require that you provide an API key in the `Authorization` header.\n\nFind full [API references at Kontent.ai Learn](https://kontent.ai/learn/docs/apis/).',
     schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
   },
   item: [],

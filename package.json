@@ -29,7 +29,7 @@
     "morgan": "1.10.0",
     "node-fetch": "3.3.0",
     "octokit": "2.0.14",
-    "openapi-to-postmanv2": "4.10.2"
+    "openapi-to-postmanv2": "4.16"
   },
   "devDependencies": {
     "assert": "2.0.0",
