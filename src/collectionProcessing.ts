@@ -345,14 +345,19 @@ const convertSpecToPostmanCollection = async (spec: Spec): Promise<PostmanCollec
         data: spec,
       },
       {
-        disableOptionalParameters: true,
-        exampleParametersResolution: 'Example',
+        // https://github.com/postmanlabs/openapi-to-postman/blob/develop/OPTIONS.md
+        alwaysInheritAuthentication: false,
+        enableOptionalParameters: false,
         folderStrategy: 'Tags',
         includeAuthInfoInExample: true,
         includeDeprecated: false,
-        optimizeConversion: false,
-        stackLimit: 50,
-        requestParametersResolution: 'Schema',
+        indentCharacter: 'Space',
+        keepImplicitHeaders: false,
+        parametersResolution: 'Example',
+        requestNameSource: 'Fallback',
+        // Setting stackLimit does NOT work. See https://github.com/postmanlabs/postman-app-support/issues/10928
+        // Stack limit is fixed at 30, insufficient for our OpenAPI specs, and leads to <Error: Too many levels of nesting to fake this schema> in Postman request bodies.
+        stackLimit: 100, 
       },
       (err: Error, conversionResult: PostmanCollection) => {
         if (conversionResult.result) {
