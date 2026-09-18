@@ -9,7 +9,7 @@
     "build": "parcel build"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   },
   "author": "janc@kentico.com",
   "license": "MIT",
