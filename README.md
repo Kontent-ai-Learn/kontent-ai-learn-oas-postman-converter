@@ -37,7 +37,7 @@ To run the app locally, provide environment variables in the `.env.local` config
 | `ApiReferenceCodenames` | yes | | Comma separated codenames of the API references to build. The order determines the order of the folders in the merged collection. |
 | `ApiReferenceKontentEnvironmentId` | yes | | ID of the Kontent.ai environment that holds the API reference content. |
 | `ApiReferenceKontentDeliveryApiKey` | yes | | **Secret.** Delivery API key for that environment. |
-| `ApiReferenceWebLinkTemplate` | yes | | URL used for links to Kontent.ai Learn in the generated descriptions. |
+| `ApiReferenceWebLinkTemplate` | yes | | URL template for links to Kontent.ai Learn in the generated descriptions. The `{{id}}` macro is replaced with the ID of the linked content item, so the value must contain `{{id}}`, otherwise every link resolves to the same URL. |
 | `ApiReferenceIsPreview` | no | `false` | Build from preview content instead of published content. |
 | `ApiReferenceIsDebug` | no | `false` | Ask the build service for debug output. |
 | `ApiReferenceServiceTimeoutMs` | no | `45000` | Timeout of a single build request, in milliseconds. |
