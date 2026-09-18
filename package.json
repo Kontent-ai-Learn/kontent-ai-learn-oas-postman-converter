@@ -9,17 +9,14 @@
     "build": "parcel build"
   },
   "engines": {
-    "node": "18.12.1",
-    "npm": "8.19.2"
+    "node": ">=18"
   },
   "author": "janc@kentico.com",
   "license": "MIT",
   "dependencies": {
-    "@octokit/request-error": "3.0.3",
     "@types/express": "4.17.17",
     "@types/fs-extra": "11.0.1",
     "@types/morgan": "1.9.4",
-    "@types/node-fetch": "2.6.2",
     "@types/webpack-dev-middleware": "5.3.0",
     "body-parser": "1.20.2",
     "connect-timeout": "1.9.0",
@@ -27,8 +24,6 @@
     "express": "4.18.2",
     "fs-extra": "11.1.0",
     "morgan": "1.10.0",
-    "node-fetch": "3.3.0",
-    "octokit": "2.0.14",
     "openapi-to-postmanv2": "4.20.0"
   },
   "devDependencies": {

@@ -1,118 +1,116 @@
 import { processSpecs } from "./collectionProcessing";
 import { debugLog, prettify } from "./utils";
 import * as dotenv from "dotenv";
-import { GithubService } from "./githubService";
-
-interface IApiReferenceFetchResult {
-  code: string;
-  apiReferenceFile: string;
-}
+import {
+  ApiReferenceService,
+  IApiReferenceServiceConfig,
+} from "./apiReferenceService";
 
 // needed to load .env environment to current process when run via package.json script
 dotenv.config({
   path: "./.env.local",
 });
 
-const accessToken = process.env.ApiReferenceGhAccessToken;
-const branch = process.env.ApiReferenceGhBranch;
-const email = process.env.ApiReferenceGhEmail;
-const owner = process.env.ApiReferenceGhOwner;
-const repository = process.env.ApiReferenceGhRepository;
-const username = process.env.ApiReferenceGhUsername;
+// The slowest measured build (management_api_v2) takes about 16 seconds.
+const DEFAULT_REQUEST_TIMEOUT_MS = 45000;
+const DEFAULT_RETRY_COUNT = 1;
 
-if (!accessToken) {
-  throw Error(`Invalid GH config: access token`);
+interface IWorkerConfig {
+  readonly service: IApiReferenceServiceConfig;
+  readonly codenames: ReadonlyArray<string>;
 }
 
-if (!branch) {
-  throw Error(`Invalid GH config: branch`);
-}
+const getRequiredEnv = (name: string): string => {
+  const value = process.env[name]?.trim();
 
-if (!email) {
-  throw Error(`Invalid GH config: email`);
-}
+  if (!value) {
+    throw Error(
+      `Invalid API reference config: environment variable '${name}' is not set.`
+    );
+  }
 
-if (!owner) {
-  throw Error(`Invalid GH config: owner`);
-}
-if (!repository) {
-  throw Error(`Invalid GH config: repository`);
-}
+  return value;
+};
 
-if (!username) {
-  throw Error(`Invalid GH config: username`);
-}
+const getBooleanEnv = (name: string, fallback: boolean): boolean => {
+  const value = process.env[name]?.trim().toLowerCase();
 
-const githubService = new GithubService({
-  accessToken: accessToken,
-  branch: branch,
-  email: email,
-  owner: owner,
-  repository: repository,
-  username: username,
-});
+  if (!value) {
+    return fallback;
+  }
 
-const apiReferenceFileNames = process.env.ApiReferenceFileNames;
-if (!apiReferenceFileNames) {
-  throw Error(
-    `Invalid API reference file names. Expected comma separated string with names of API reference files.`
-  );
-}
+  return value === "true" || value === "1";
+};
 
-const processFiles: string[] = apiReferenceFileNames
-  .split(",")
-  .map((m) => m.trim());
+const getNumberEnv = (name: string, fallback: number): number => {
+  const value = Number(process.env[name]?.trim());
 
-export const work = async () => {
+  return Number.isFinite(value) && value > 0 ? value : fallback;
+};
+
+const createConfig = (): IWorkerConfig => {
+  const codenames = getRequiredEnv("ApiReferenceCodenames")
+    .split(",")
+    .map((codename) => codename.trim())
+    .filter((codename) => codename.length > 0);
+
+  if (codenames.length === 0) {
+    throw Error(
+      `Invalid API reference config: 'ApiReferenceCodenames' must be a comma separated list of API reference codenames.`
+    );
+  }
+
+  return {
+    codenames: codenames,
+    service: {
+      serviceUrl: getRequiredEnv("ApiReferenceServiceUrl"),
+      functionKey: getRequiredEnv("ApiReferenceServiceFunctionKey"),
+      kontentAiEnvironmentId: getRequiredEnv("ApiReferenceKontentEnvironmentId"),
+      kontentAiDeliveryApiKey: getRequiredEnv(
+        "ApiReferenceKontentDeliveryApiKey"
+      ),
+      webLinkTemplate: getRequiredEnv("ApiReferenceWebLinkTemplate"),
+      isPreview: getBooleanEnv("ApiReferenceIsPreview", false),
+      isDebug: getBooleanEnv("ApiReferenceIsDebug", false),
+      requestTimeoutMs: getNumberEnv(
+        "ApiReferenceServiceTimeoutMs",
+        DEFAULT_REQUEST_TIMEOUT_MS
+      ),
+      retryCount: getNumberEnv(
+        "ApiReferenceServiceRetryCount",
+        DEFAULT_RETRY_COUNT
+      ),
+    },
+  };
+};
+
+// Validated lazily so a misconfiguration surfaces as a request error instead of
+// killing the process while this module is being imported.
+let cachedConfig: IWorkerConfig | null = null;
+
+const getConfig = (): IWorkerConfig => {
+  if (!cachedConfig) {
+    cachedConfig = createConfig();
+  }
+
+  return cachedConfig;
+};
+
+export const work = async (): Promise<string> => {
+  const { service: serviceConfig, codenames } = getConfig();
+  const apiReferenceService = new ApiReferenceService(serviceConfig);
+
   debugLog(
-    `Accessing GitHub: '${owner}/${repository}@${branch}' with user '${username}(${email})'`
+    `Building API references [${codenames.join(", ")}] via '${serviceConfig.serviceUrl}' for environment '${serviceConfig.kontentAiEnvironmentId}'.`
   );
 
-  const fetchedApiReferences: IApiReferenceFetchResult[] = [];
-
-  const fetchPromises: Promise<void>[] = [];
-  for (const file of processFiles) {
-    debugLog(`Fetching file '${file}'`);
-
-    fetchPromises.push(
-      githubService
-        .getApiReferenceCode({
-          filePath: `${file}`,
-        })
-        .then((apiReferenceCode) => {
-          if (apiReferenceCode) {
-            fetchedApiReferences.push({
-              code: apiReferenceCode,
-              apiReferenceFile: file,
-            });
-          } else {
-            debugLog(`File '${file}' is empty or invalid`);
-          }
-
-          debugLog(`Successfully fetched '${file}'`);
-        })
-    );
-  }
-
-  await Promise.all(fetchPromises);
-
-  const orderedApiReferences: IApiReferenceFetchResult[] = [];
-
-  for (const filename of processFiles) {
-    const fetchedReference = fetchedApiReferences.find(
-      (m) =>
-        m.apiReferenceFile.toLowerCase().trim() ===
-        filename.toLowerCase().trim()
-    );
-
-    if (fetchedReference) {
-      orderedApiReferences.push(fetchedReference);
-    }
-  }
-
-  const collection = await processSpecs(
-    orderedApiReferences.map((m) => m.code)
+  const specs = await Promise.all(
+    codenames.map((codename) =>
+      apiReferenceService.getApiReferenceSpec({ codename: codename })
+    )
   );
+
+  const collection = await processSpecs(specs);
 
   return prettify(collection);
 };

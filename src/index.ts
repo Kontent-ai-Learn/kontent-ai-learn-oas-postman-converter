@@ -32,7 +32,7 @@ const getWorkerPromise = (): Promise<string> => {
 
 const main = async () => {
   const app = express();
-  app.use(timeout("120s"));
+  app.use(timeout("180s"));
   // Set up logging
   app.use(morgan("dev"));
   const router = express.Router();
